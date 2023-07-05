@@ -1,0 +1,22 @@
+.page {
+  background-color:  #000;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  max-width: 320px;
+}
+
+@media screen and (min-width: 768px) {
+  .page {
+    max-width: 700px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .page {
+    max-width: 880px;
+  }
+}

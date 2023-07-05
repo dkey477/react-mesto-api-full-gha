@@ -1,0 +1,13 @@
+.element__icon {
+  width: 24px;
+  height: 24px;
+  background: url(../../../images/heart.svg) no-repeat;
+  background-position: center center;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.3s ease-in;
+}
+
+.element__icon:hover {
+  opacity: 0.5;
+}

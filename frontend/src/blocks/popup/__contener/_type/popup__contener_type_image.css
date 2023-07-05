@@ -1,0 +1,6 @@
+.popup__contener_type_image {
+  display: flex;
+  flex-direction: column;
+  row-gap: 9px;
+  color: #fff;
+}

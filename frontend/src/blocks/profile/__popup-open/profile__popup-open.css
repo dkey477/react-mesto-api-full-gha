@@ -1,0 +1,23 @@
+.profile__popup-open {
+  margin-left: 10px;
+  background: url(../../../images/pen.svg) no-repeat;
+  background-position: center center;
+  color: #fff;
+  border: 1px #fff solid;
+  width: 18px;
+  height: 18px;
+  transition: opacity 0.3s ease-in;
+  cursor: pointer;
+}
+
+.profile__popup-open:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 900px) {
+  .profile__popup-open {
+    width: 24px;
+    height: 24px;
+    margin-left: 18px;
+  }
+}

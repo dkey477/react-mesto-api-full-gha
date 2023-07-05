@@ -1,0 +1,24 @@
+.elements {
+  margin-top: 40px;
+  margin-left: 19px;
+  margin-right: 19px;
+  display: grid;
+  grid-template-columns: 100%;
+  row-gap: 21px;
+  padding: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .elements {
+    grid-template-columns: 50% 50%;
+    column-gap: 17px;
+  }
+}
+
+@media screen and (min-width: 900px) {
+  .elements {
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 17px;
+    margin: 54px 0 0;
+  }
+}

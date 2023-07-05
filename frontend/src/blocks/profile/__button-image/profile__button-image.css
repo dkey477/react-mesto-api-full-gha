@@ -1,0 +1,22 @@
+.profile__button-image {
+  position: relative;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 0;
+}
+
+.profile__button-image::before{
+position: absolute;
+top: 0;
+left: 0;
+content: '';
+background: url(../../../images/pen.svg) rgba(0, 0, 0, 0.8) no-repeat center / 26px 26px;
+opacity: 0;
+width: 120px;
+height: 120px;
+}
+
+.profile__button-image:hover:before{
+  opacity: 1;
+}

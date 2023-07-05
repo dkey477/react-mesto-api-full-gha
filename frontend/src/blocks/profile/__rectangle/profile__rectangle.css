@@ -1,0 +1,23 @@
+.profile__rectangle {
+  min-width: 282px;
+  min-height: 45px;
+  border: 2px #fff solid;
+  margin-top: 36px;
+  background: url(../../../images/plus.svg) no-repeat;
+  background-position: center center;
+  color: #fff;
+  transition: opacity 0.3s ease-in;
+  cursor: pointer;
+}
+
+.profile__rectangle:hover {
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 900px) {
+  .profile__rectangle {
+    min-width: 150px;
+    max-height: 50px;
+    margin: 0;
+  }
+}
