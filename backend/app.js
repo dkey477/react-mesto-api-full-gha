@@ -5,7 +5,7 @@ const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
 const errorCenter = require('./middlewares/errorCenter');
-const { requestLogger, errorLogger } = require('./middlewares/logger')
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const app = express();
 app.use(requestLogger);
