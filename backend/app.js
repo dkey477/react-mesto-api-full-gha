@@ -13,7 +13,7 @@ app.use(requestLogger);
 app.use(express.json());
 mongoose.connect('mongodb://127.0.0.1:27017/mestodb');
 app.use(cookieParser());
-app.use('/api', router);
+app.use(router);
 
 app.use(errorLogger);
 app.use(errors());
