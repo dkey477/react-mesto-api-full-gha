@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const router = require('./routes/index');
 const errorCenter = require('./middlewares/errorCenter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const app = express();
 app.use(requestLogger);
@@ -16,6 +17,7 @@ app.use(cookieParser());
 app.use(router);
 
 app.use(errorLogger);
+app.use(cors);
 app.use(errors());
 app.use(errorCenter);
 
