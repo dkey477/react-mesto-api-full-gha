@@ -37,21 +37,23 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (loggedIn) {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then(([card, user]) => {
-        setCurrentUser(user);
-        setCards(card);
+        setCurrentUser(user.user);
+        setCards(card.data);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }}, [loggedIn]);
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
+    console.log(card)
     api
       .toggleLike(card._id, isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
+          state.map((c) => (c._id === card._id ? newCard.data : c))
         );
       })
       .catch((err) => console.log(err));
@@ -69,8 +71,8 @@ function App() {
   function handleUpdateUser(user) {
     api
       .setUserInfo(user)
-      .then((res) => {
-        setCurrentUser(res);
+      .then((user) => {
+        setCurrentUser(user.user);
         closeAllPopups();
       })
       .catch((err) => console.log(err));
@@ -79,8 +81,8 @@ function App() {
   function handleUpdateAvatar(data) {
     api
       .setAvatar(data)
-      .then((res) => {
-        setCurrentUser(res);
+      .then((user) => {
+        setCurrentUser(user.user);
         closeAllPopups();
       })
       .catch((err) => console.log(err));
@@ -90,7 +92,7 @@ function App() {
     api
       .addCard(data)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([newCard.data, ...cards]);
         closeAllPopups();
       })
       .catch((err) => console.log(err));
@@ -127,19 +129,14 @@ function App() {
   }
 
   function checkToken() {
-    const token = localStorage.getItem("jwt");
-    if (token) {
       auth
-        .checkToken(token)
+        .checkToken()
         .then((res) => {
-          if (res) {
             setLoggedIn(true);
-            setUserData(res.data.email);
+            setUserData(res.user.email);
             navigate("/", { replace: true });
-          }
         })
         .catch((err) => console.log(err));
-    }
   }
 
   useEffect(() => {
@@ -165,7 +162,7 @@ function App() {
     auth
       .login(email, password)
       .then((data) => {
-        localStorage.setItem("jwt", data.token);
+        console.log(data)
         setLoggedIn(true);
         setUserData(email);
         navigate("/");

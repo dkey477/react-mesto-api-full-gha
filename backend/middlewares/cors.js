@@ -5,6 +5,9 @@ const allowedCors = [
   'http://api.mestodkey47.nomoreparties.sbs',
   'https://api.mestodkey47.nomoreparties.sbs',
   'http://localhost:3000',
+  'http://localhost:3001',
+  'https://localhost:3000',
+  'https://localhost:3001',
 ];
 
 const cors = (req, res, next) => {
@@ -13,7 +16,7 @@ const cors = (req, res, next) => {
     res.header('Access-Control-Allow-Origin', origin);
   }
   const { method } = req;
-
+  res.header('Access-Control-Allow-Credentials', true);
   const DEFAULT_ALLOWED_METHODS = 'GET,HEAD,PUT,PATCH,POST,DELETE';
   if (method === 'OPTIONS') {
     res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);

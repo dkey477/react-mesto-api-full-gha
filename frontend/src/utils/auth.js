@@ -1,4 +1,4 @@
-const BASE_URL = "https://auth.nomoreparties.co"
+const BASE_URL = "http://localhost:3000"
 
 const checkStatus = (res) => {
     if(res.ok) {
@@ -8,13 +8,13 @@ const checkStatus = (res) => {
 };
 
 export const register = ( email, password ) => {
-    // console.log(email, password)
     return fetch(`${BASE_URL}/signup`, {
         method: "POST",
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify( { email, password } )
     })
     .then((res) => checkStatus(res))
@@ -27,6 +27,7 @@ export const login = (email, password) => {
             "Accept": "application/json",
             "Content-Type": "application/json"
         },
+        credentials: "include",
         body: JSON.stringify({ email, password })
     })
     .then((res) => checkStatus(res))
@@ -38,8 +39,8 @@ export const checkToken = (token) => {
         headers: {
             "Accept": "application/json",
             "Content-Type": "application/json",
-            "Authorization" : `Bearer ${token}`
         },
+        credentials: "include",
     })
     .then((res) => checkStatus(res))
 };
