@@ -1,5 +1,5 @@
-const BASE_URL = "http://localhost:3000"
-
+// const BASE_URL = "http://localhost:3000"
+const BASE_URL = "https://api.mestodkey47.nomoreparties.sbs"
 const checkStatus = (res) => {
     if(res.ok) {
         return res.json();

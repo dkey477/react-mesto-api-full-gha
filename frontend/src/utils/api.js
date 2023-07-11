@@ -119,7 +119,8 @@ toggleLike(id, isLike) {
 }
 
 export const api = new Api({
-  baseUrl: "http://localhost:3000",
+  // baseUrl: "http://localhost:3000",
+  baseUrl: "https://api.mestodkey47.nomoreparties.sbs",
   headers: {
     'Content-Type': 'application/json'
   },
