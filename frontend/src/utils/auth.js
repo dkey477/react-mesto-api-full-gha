@@ -1,5 +1,5 @@
-// const BASE_URL = "http://localhost:3000"
-const BASE_URL = "https://api.mestodkey47.nomoreparties.sbs"
+const BASE_URL = "http://localhost:3000"
+// const BASE_URL = "https://api.mestodkey47.nomoreparties.sbs"
 const checkStatus = (res) => {
     if(res.ok) {
         return res.json();
@@ -45,3 +45,14 @@ export const checkToken = (token) => {
     .then((res) => checkStatus(res))
 };
 
+export const logout = () => {
+    return fetch(`${BASE_URL}/signout`, {
+        method: "GET",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        credentials: "include",
+    })
+    .then((res) => checkStatus(res))
+};

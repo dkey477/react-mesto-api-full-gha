@@ -9,15 +9,17 @@ const auth = (req, res, next) => {
   try {
     if (!token) {
       next(new UnauthorizedError('Авторизуйтесь'));
+      return;
     }
-    payload = jwt.verify(token, 'secret');
+    payload = jwt.verify(token, process.env.NODE_ENV === 'production' ? `${process.env.JWT_SECRET}` : 'dev-secret');
   } catch (err) {
     next(new UnauthorizedError('Авторизуйтесь'));
+    return;
   }
 
   req.user = payload;
 
-  return next();
+  next();
 };
 
 module.exports = auth;

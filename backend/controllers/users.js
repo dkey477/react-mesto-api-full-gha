@@ -17,14 +17,18 @@ const login = (req, res, next) => {
 
   return User.findUserByCredentials(email, password)
     .then((user) => {
-      const token = jwt.sign({ _id: user._id }, 'secret');
+      const token = jwt.sign(
+        { _id: user._id },
+        process.env.NODE_ENV === 'production' ? `${process.env.JWT_SECRET}` : 'secret',
+        { expiresIn: '7d' },
+      );
       res.cookie('jwt', token, {
         maxAge: 3600000,
         httpOnly: true,
         sameSite: 'none',
         secure: true,
       });
-      res.send({ token });
+      res.send({ message: 'Авторизация прошла успешно' });
     })
     .catch((err) => next(err));
 };
@@ -113,6 +117,14 @@ const updateUserAvatar = (req, res, next) => {
     .catch(next);
 };
 
+const logout = (req, res, next) => {
+  try {
+    res.clearCookie('jwt').send({ message: 'Осуществлен выход' });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   getUsers,
   getUserById,
@@ -121,4 +133,5 @@ module.exports = {
   updateUserAvatar,
   login,
   getCurrentUser,
+  logout,
 };

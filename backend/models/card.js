@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/no-extraneous-dependencies */
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { REGEX } = require('../utilits/constants');
 
 const cardSchema = new mongoose.Schema({
   name: {
@@ -13,7 +15,7 @@ const cardSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator: (url) => /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/.test(url),
+      validator: (url) => REGEX.test(url),
       message: 'Введите URL',
     },
   },

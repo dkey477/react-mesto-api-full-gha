@@ -1,6 +1,8 @@
 const router = require('express').Router();
 // eslint-disable-next-line import/no-extraneous-dependencies
 const { celebrate, Joi } = require('celebrate');
+const { REGEX } = require('../utilits/constants');
+
 const {
   getUsers,
   getUserById,
@@ -36,7 +38,7 @@ router.patch(
     body: Joi.object().keys({
       avatar: Joi.string()
         .required()
-        .pattern(/(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/),
+        .pattern(REGEX),
     }),
   }),
   updateUserAvatar,

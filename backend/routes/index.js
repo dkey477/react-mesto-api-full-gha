@@ -3,9 +3,10 @@ const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const userRoutes = require('./users');
 const cardRoutes = require('./cards');
-const { createUser, login } = require('../controllers/users');
+const { createUser, login, logout } = require('../controllers/users');
 const auth = require('../middlewares/auth');
 const NotFoundError = require('../errors/NotFoundError');
+const { REGEX } = require('../utilits/constants');
 
 router.post('/signup', celebrate({
   body: Joi.object().keys({
@@ -13,7 +14,7 @@ router.post('/signup', celebrate({
     password: Joi.string().required().min(8),
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string().min(2).pattern(/(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/),
+    avatar: Joi.string().min(2).pattern(REGEX),
   }),
 }), createUser);
 
@@ -27,7 +28,9 @@ router.post('/signin', celebrate({
 router.use(auth);
 router.use('/users', userRoutes);
 router.use('/cards', cardRoutes);
+router.use('/signout', logout);
 router.use('/*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
+
 module.exports = router;

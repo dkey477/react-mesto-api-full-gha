@@ -48,7 +48,6 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
-    console.log(card)
     api
       .toggleLike(card._id, isLiked)
       .then((newCard) => {
@@ -162,7 +161,6 @@ function App() {
     auth
       .login(email, password)
       .then((data) => {
-        console.log(data)
         setLoggedIn(true);
         setUserData(email);
         navigate("/");
@@ -173,10 +171,14 @@ function App() {
   }
 
   function handleSignOut() {
-    localStorage.removeItem("jwt");
+   auth.logout()
+   .then((res) => {
     setLoggedIn(false);
-    navigate("/sign-in");
-  }
+   })
+   .catch((err) =>{
+    console.log(err);
+   })
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
